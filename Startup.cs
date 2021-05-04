@@ -12,6 +12,7 @@ using app.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Seeders;
 
 namespace app
 {
@@ -28,17 +29,37 @@ namespace app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
+                options.UseNpgsql(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => {
+
+                options.SignIn.RequireConfirmedAccount = true;
+
+                // Require settings
+                options.Password.RequireDigit = true; 
+                options.Password.RequiredLength = 8; 
+                options.Password.RequireNonAlphanumeric = false; 
+                options.Password.RequireUppercase = true; 
+                options.Password.RequireLowercase = false; 
+                options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30); 
+                options.Lockout.MaxFailedAccessAttempts = 10; 
+                options.Lockout.AllowedForNewUsers = true;
+                // User settings
+                options.User.RequireUniqueEmail = true;
+
+            })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +87,15 @@ namespace app
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            RunSeeders(serviceProvider);
+        }
+
+        private void RunSeeders (IServiceProvider serviceProvider){
+            AuthSeeder authseeder = new AuthSeeder(serviceProvider);
+            MoviePriceSeeder moviePriceSeeder = new MoviePriceSeeder();
+            authseeder.Run();
+            moviePriceSeeder.Run();
         }
     }
 }

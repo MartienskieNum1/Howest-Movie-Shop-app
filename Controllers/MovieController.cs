@@ -15,6 +15,8 @@ namespace app.Controllers
         MovieService movieService = new MovieService();
         ShopMoviePriceService shopMoviePriceService = new ShopMoviePriceService();
 
+        [Route("")]
+        [Route("[action]")]
         public IActionResult Movies()
         {
             var movies = movieService.All();

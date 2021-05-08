@@ -7,5 +7,9 @@ namespace app.Models
     {
         public int Count {get; set;}
         public List<MovieViewModel> Movies {get; set;}
+
+        public string SearchValue {get; set;}
+        public string SortKey {get; set;}
+        public string SortOrder {get; set;}
     }
 }

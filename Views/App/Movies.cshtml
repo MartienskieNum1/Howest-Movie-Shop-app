@@ -3,7 +3,7 @@
 @{
     Random rand = new Random();
     Layout = "_LayoutShop";
-    int id = rand.Next(0, 250);
+    int id = rand.Next(0, Model.Count);
 }
 
 <section id="movieoftheday">
@@ -28,20 +28,18 @@
             <p>Browse our large selection of movies and have your favorite movie delivered to you at a moment
                 of your choosing</p>
             <p>Stay home, We care about your health.</p>
-            <form method="post" action="/Movie">
+            <form method="post" asp-controller="App" asp-action="Filter">
                 <button type="submit" class="order">Search</button>
-                <input type="search" name="SearchValue" id="SearchValue" />
+                <input type="search" asp-for="SearchValue" id="SearchValue" />
                 <label>Sort items by</label>
-                <select id="SortKey" name="SortKey">
+                <select id="SortKey" asp-for="SortKey">
                     <option value="Title">Title</option>
                     <option value="Year">Year</option>
                 </select>
-                <select id="SortOrder" name="SortOrder">
+                <select id="SortOrder" asp-for="SortOrder">
                     <option value="asc">asc</option>
                     <option value="desc">desc</option>
                 </select>
-                <input name="__RequestVerificationToken" type="hidden"
-                    value="CfDJ8AV1ePFQMUBFluKTcp78XFLgxJk0o2IUZMkVP4cWRRqePT2Y00HEIJ-AbyNhPWCadBPfrn_CkqlnNfD3p8a2q2pmSVDBIktZnEnIkoK5vu_Sw6lt1BNMG3o1TFNluMHmeSaAcWHvbC6ZdmeC-qHHstqeiJawOa1GDLy4O3pfq2g8Vedt3IHjcOzs-cwDISQjxA" />
             </form>
             <div class="flexcontainer">
                 @foreach (var movie in Model.Movies)
@@ -63,8 +61,6 @@
                                 <input type="hidden" name="movieId" value="@movie.Id" />
                                 <input type="submit" value="Order" name="Order" id="orderButton" />
                             </div>
-                            <input name="__RequestVerificationToken" type="hidden"
-                                value="CfDJ8AV1ePFQMUBFluKTcp78XFLgxJk0o2IUZMkVP4cWRRqePT2Y00HEIJ-AbyNhPWCadBPfrn_CkqlnNfD3p8a2q2pmSVDBIktZnEnIkoK5vu_Sw6lt1BNMG3o1TFNluMHmeSaAcWHvbC6ZdmeC-qHHstqeiJawOa1GDLy4O3pfq2g8Vedt3IHjcOzs-cwDISQjxA" />
                         </form>
                     </article>
                 }

@@ -21,6 +21,7 @@ namespace app.Controllers
 
             return View(new MoviesViewModel
             {
+                Count = movies.Count(),
                 Movies = movies.Select(m => {
                     var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
                     return new MovieViewModel

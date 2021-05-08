@@ -1,0 +1,38 @@
+@{
+    Layout = "_LayoutShop";
+}
+
+<section id="cart">
+    <div id="personalinformation">
+        <div class="text-danger validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
+</ul></div>
+        <br/>
+        <form method="POST" action="/ShoppingCart">
+            <label for="Name">Full name:</label>
+            <input id="Name" name="Name" type="text" value="matthiasblomme@gmail.com"/>
+
+            <label for="Street">Street:</label>
+            <textarea id="Street" name="Street">sqdf</textarea>
+
+            <label for="City">City:</label>
+            <textarea id="City" name="City">qsdf</textarea>
+
+            <label for="PostalCode">Postal code:</label>
+            <textarea id="PostalCode" name="PostalCode">qsdf</textarea>
+
+            <label for="Country">Country:</label>
+            <textarea id="Country" name="Country">qsf</textarea>
+
+            <label>Payment method:</label>
+            <input checked type="radio" name="PaymentMethod" id="payment-card" value="card"/><label
+                for="payment-card">Card</label>
+            <input type="radio" name="PaymentMethod" id="payment-bitcoin" value="bitcoin"/><label for="payment-bitcoin">Bitcoin</label>
+            <input type="radio" name="PaymentMethod" id="payment-goldbars" value="gold_bars"/><label
+                for="payment-goldbars">Gold
+            bars</label>
+            <input type="radio" name="PaymentMethod" id="payment-kind" value="in_kind"/><label for="payment-kind">In
+            kind</label>
+            <input type="submit" value="confirm order" class="order"/>
+        </form>
+    </div>
+</section>

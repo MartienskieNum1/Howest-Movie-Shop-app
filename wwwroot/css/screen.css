@@ -1,0 +1,565 @@
+/*---------------------*/
+/*      VARIABLES      */
+/*---------------------*/
+/*---------------------*/
+/*   GENERAL ELEMENTS  */
+/*---------------------*/
+body {
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  /* Sticky footer*/
+  display: flex;
+  flex-flow: nowrap column;
+  height: 100vh;
+}
+
+h1,
+h2 {
+  font-family: Pacifico, Georgia, Cambria, serif;
+}
+
+h3,
+h4 {
+  font-weight: bold;
+}
+
+a {
+  color: #b4df5b;
+}
+
+header a {
+  text-decoration: none;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+img {
+  max-width: 100%;
+}
+
+main {
+  padding-top: 95px;
+}
+
+/* --- General classes --- */
+.hidden,
+header nav li:last-child .viewcart .hidden {
+  display: none;
+}
+
+/* --- H1 title --- */
+h1 {
+  line-height: 40px;
+  padding-left: 45px;
+  text-transform: lowercase;
+  /*background-image: url(../media/dinner.svg);*/
+  background-size: 40px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+/* --- Navigation --- */
+header {
+  min-height: 70px;
+  background-color: rgba(30, 35, 39, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 0 20px;
+  margin-bottom: 2%;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  box-sizing: border-box;
+}
+header h1 {
+  color: #b4df5b;
+  font-size: 2rem;
+}
+header nav li {
+  display: inline;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-right: 15px;
+}
+header nav li a {
+  color: #fff;
+  display: inline-block;
+  border-bottom: 3px solid transparent;
+  padding-bottom: 4px;
+}
+header nav li a:hover,
+header nav li a.active {
+  color: #b4df5b;
+  border-bottom-color: #b4df5b;
+}
+header nav li:last-child a {
+  color: #fff;
+  background-color: #b4df5b;
+  padding: 7px;
+  margin-left: 45px;
+  border-radius: 5px;
+  border: 4px solid #b4df5b;
+}
+header nav li:last-child a:hover {
+  background-color: #fff;
+  color: #b4df5b;
+}
+header nav li:last-child a span {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 6px 8px;
+  border-radius: 50%;
+  background-color: #ff7cd8;
+  color: #fff;
+}
+
+/* --- Section widths --- */
+section {
+  width: 80%;
+  margin: 0 auto;
+}
+
+section,
+aside {
+  margin-bottom: 3%;
+}
+
+section h2 {
+  font-size: 3rem;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+/* --- Intermezzo --- */
+aside {
+  background-color: #b4df5b;
+  color: #fff;
+  font-size: 3.4rem;
+  line-height: 210%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* --- Footer--- */
+footer {
+  background-color: #000;
+  color: #fff;
+  margin: auto 0 0 0;
+  text-align: center;
+  padding: 20px 0;
+}
+footer div {
+  padding-top: 120px;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 2%;
+  margin-right: 10%;
+  line-height: 150%;
+  /*background-image: url(../media/envelope.svg);*/
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100px;
+}
+footer div a {
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+}
+footer div a:hover {
+  text-decoration: underline;
+}
+footer div h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+footer div:last-of-type {
+  /*background-image: url(../media/placeholder.svg);*/
+  margin-right: 0;
+}
+footer > p {
+  font-size: 0.7rem;
+  color: #eee;
+}
+
+/*---------------------*/
+/*   Movie of the day   */
+/*---------------------*/
+#moviealoftheday {
+  position: relative;
+}
+#movieoftheday h2 {
+  text-shadow: 2px 2px rgba(30, 35, 39, 0.9);
+  color: slategrey;
+  position: absolute;
+  top: 150px;
+  right: 150px;
+}
+#movieoftheday img {
+  display: block;
+  height: auto;
+  width: 40%;
+  background-color: #ff7cd8;
+  color: #ff7cd8;
+}
+#movieoftheday div {
+  position: absolute;
+  right: 150px;
+  top: 300px;
+  width: 40%;
+}
+#movieoftheday div p span {
+  display: inline-block;
+  background-color: rgba(16, 61, 81, 0.9);
+  text-shadow: 2px 2px 2px rgba(16, 61, 81, 0.5);
+  color: #fff;
+  padding: 5px;
+}
+#movieoftheday div p strong {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(16, 61, 81, 0.5);
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 5px;
+  background-color: rgba(16, 61, 81, 0.9);
+  padding: 5px;
+}
+
+/*---------------------*/
+/*   Movie Details   */
+/*---------------------*/
+#moviedetails {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+#moviedetails h2 {
+  margin-bottom: 40px;
+  text-shadow: 2px 2px rgba(30, 35, 39, 0.9);
+  color: slategray;
+}
+#moviedetails div {
+  width: 100%;
+}
+#moviedetails img {
+  display: block;
+  height: 800px;
+  background-color: #ff7cd8;
+  margin-right: 20px;
+  color: #ff7cd8;
+}
+#moviedetails div p span {
+  display: inline-block;
+  background-color: rgba(16, 61, 81, 0.9);
+  text-shadow: 2px 2px 2px rgba(16, 61, 81, 0.5);
+  color: #fff;
+  padding: 5px;
+}
+#moviedetails div p strong {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(16, 61, 81, 0.5);
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+/*---------------------*/
+/*     COLLECTION      */
+/*---------------------*/
+#collection .flexcontainer {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: space-between;
+}
+#collection form {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+#collection form label {
+  font-size: 0.9rem;
+  text-transform: lowercase;
+  margin-right: 5px;
+  font-weight: bold;
+  display: inline-block;
+}
+#collection form input {
+  display: inline-block;
+}
+#collection form input[type="search"] {
+  margin-right: 5px;
+}
+#collection article {
+  flex: 0 1 22%;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+#collection article img {
+  width: auto;
+  height: 500px;
+}
+#collection article h3 {
+  position: absolute;
+  top: 15px;
+  text-align: right;
+  background-color: rgba(180, 223, 91, 0.9);
+  text-shadow: 2px 2px 2px rgba(16, 61, 81, 0.5);
+  color: #fff;
+  padding: 5px;
+}
+#collection article figcaption {
+  font-size: 0.7rem;
+  margin-bottom: 5px;
+}
+#collection article .info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#collection article p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+section .order {
+  background-color: #000000;
+  color: #fff;
+  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  text-transform: lowercase;
+  transition: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+section .addedtocart {
+  transition: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in;
+  background-color: #b4df5b;
+}
+
+/*---------------------*/
+/*     Shopping cart   */
+/*---------------------*/
+#cart {
+  width: 100%;
+}
+#cartoverview,
+#popup,
+#personalinformation,
+#confirmation {
+  margin: 25px auto;
+  background-color: #fff;
+  width: 50%;
+  border: 5px solid #b4df5b;
+  padding: 20px;
+}
+
+#popup {
+  width: 50%;
+}
+
+#popup article {
+  display: flex;
+  flex-flow: row wrap;
+}
+#popup article h3 {
+  flex: 1 1 100%;
+  margin-bottom: 15px;
+}
+#popup article figure,
+#popup article .info {
+  flex: 1 1 auto;
+}
+#popup article figure {
+  margin-right: 2%;
+  max-width: 35%;
+}
+#popup article dl {
+  font-size: 0.9rem;
+  text-transform: lowercase;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 10px;
+}
+#popup article dl dt,
+#popup article dl dd {
+  flex: 0 1 50%;
+  margin-bottom: 5px;
+}
+#popup article dl dt {
+  color: #000;
+  font-weight: bold;
+}
+#popup article p {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000;
+}
+
+#cart h2 {
+  margin-bottom: 30px;
+}
+#cart h2 span {
+  color: #ff7cd8;
+}
+#cart p strong {
+  font-weight: bold;
+}
+#cart table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 15px;
+}
+#cart table th {
+  font-weight: bold;
+}
+#cart table tbody td:nth-child(even) {
+  text-align: right;
+  padding-right: 15px;
+}
+#cart table tfoot {
+  text-align: right;
+}
+#cart table tfoot td:last-child {
+  background-color: #b4df5b;
+  color: #fff;
+}
+#cart table td,
+#cart table th {
+  padding: 10px;
+}
+#cart table tr:nth-child(even) td {
+  background-color: #eee;
+}
+#cart .order,
+#cart input[type="submit"] {
+  margin-left: auto;
+  margin-right: 0;
+  display: block;
+  width: 200px;
+}
+
+label,
+input[type="text"],
+input[type="number"],
+textarea {
+  display: block;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  background-color: #b4df5b;
+  padding: 3px;
+  color: #fff;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+  border: 4px solid #b4df5b;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input[type="number"] {
+  width: 20%;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  background-color: #ff7cd8;
+  border-color: #ff7cd8;
+}
+
+input[type="radio"],
+input[type="radio"] + label {
+  display: inline-block;
+  font-weight: normal;
+}
+
+input[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: Raleway, Arial, Helvetica, sans-serif;
+}
+
+/*---------------------*/
+/*     Identity        */
+/*---------------------*/
+
+form#logoutForm {
+  display: inline-block;
+}
+
+form#logoutForm button {
+  color: #b4df5b;
+  display: inline-block;
+  border-bottom: 3px solid transparent;
+  padding-bottom: 4px;
+  border: 2px solid transparent;
+  background: none;
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+form#logoutForm button:hover {
+  border-bottom-color: #b4df5b;
+}
+
+header nav li:first-child a {
+  margin-right: 45px;
+}
+
+header nav a#manage {
+  margin: 0 10px;
+}
+
+#orders {
+  font-size: 1.5rem;
+}
+
+#orders table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#orders th,
+#orders td {
+  text-align: left;
+  padding: 8px;
+}
+
+#orders tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 1800px) {
+  #collection article img {
+    width: auto;
+    height: 350px;
+  }
+}
+
+@media (max-width: 1200px) {
+  #collection article img {
+    width: auto;
+    height: 250px;
+  }
+}

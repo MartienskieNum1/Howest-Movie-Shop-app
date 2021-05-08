@@ -1,20 +1,22 @@
 @model app.Models.MoviesViewModel
 
 @{
+    Random rand = new Random();
     Layout = "_LayoutShop";
+    int id = rand.Next(0, 250);
 }
 
 <section id="movieoftheday">
-            <a href="/Details?id=61">
+            <a href="/Details?id=@id">
                 <h2>
                     Movie of the day
                 </h2>
-                <img src="https://webdim.be/public/images/movies/Avengers- Infinity War.jpg"
-                    alt="Avengers: Infinity War" title="Avengers: Infinity War">
+                <img src="@Model.Movies[id].Url"
+                    alt="@Model.Movies[id].Title" title="@Model.Movies[id].Title">
                 <div>
                     <p><span>Each day we select a different movie for you to enjoy.
                             The perfect start for the perfect evening.</span></p>
-                    <p><span>Today's special pick is</span> <strong>Avengers: Infinity War</strong></p>
+                    <p><span>Today's special pick is</span> <strong>@Model.Movies[id].Title</strong></p>
                 </div>
             </a>
         </section>

@@ -10,7 +10,7 @@ namespace app.Controllers
 {
     [Route("")]
     [Route("[controller]")]
-    public class AppController : Controller
+    public class MovieController : Controller
     {
         MovieService movieService = new MovieService();
         ShopMoviePriceService shopMoviePriceService = new ShopMoviePriceService();

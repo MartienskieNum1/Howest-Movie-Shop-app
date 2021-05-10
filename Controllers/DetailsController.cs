@@ -13,6 +13,8 @@ namespace app.Controllers
         MovieService movieService = new MovieService();
         GenreMovieService genreMovieService = new GenreMovieService();
         GenreService genreService = new GenreService();
+        MovieRoleService movieRoleService = new MovieRoleService();
+        PersonService personService = new PersonService();
 
         [Route("/Details")]
         public IActionResult MovieDetail(int id)
@@ -20,6 +22,9 @@ namespace app.Controllers
             var movie = movieService.GetMovieForMovieId(id);
             int genreId = genreMovieService.GetGenreIdForMovieId(id);
             string genre = genreService.GetGenreForGenreId(genreId);
+            List<int> personIds = movieRoleService.GetPersonIdsForMovieIdAndRole(id, "actor");
+            List<string> personNames = personService.GetPersonNamesForPersonIds(personIds);
+            
             return View("~/Views/Movie/MovieDetail.cshtml", new MovieViewModel
             {
                 Id = Convert.ToInt32(movie.Id),
@@ -28,7 +33,8 @@ namespace app.Controllers
                 Year = movie.Year,
                 Rating = movie.Rating,
                 Genre = genre,
-                Plot = movie.Plot
+                Plot = movie.Plot,
+                Actors = personNames
             });
         }
     }

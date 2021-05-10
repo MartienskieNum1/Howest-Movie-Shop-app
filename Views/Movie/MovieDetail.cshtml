@@ -23,28 +23,10 @@
                 <p><span>Year <strong>@Model.Year</strong></span></p>
                 <p><span>Plot <strong>@Model.Plot</strong></span></p>
                 <p><span>Actors:
-                        <strong>Derek Pykett</strong>
-                        <strong>Wallace Shawn</strong>
-                        <strong>Danny Blackner</strong>
-                        <strong>Robin Wright</strong>
-                        <strong>Billy Crystal</strong>
-                        <strong>Chris Sarandon</strong>
-                        <strong>Cary Elwes</strong>
-                        <strong>Mandy Patinkin</strong>
-                        <strong>Christopher Guest</strong>
-                        <strong>Andr&#xE9; the Giant</strong>
-                        <strong>Fred Savage</strong>
-                        <strong>Peter Falk</strong>
-                        <strong>Peter Cook</strong>
-                        <strong>Mel Smith</strong>
-                        <strong>Carol Kane</strong>
-                        <strong>Anne Dyson</strong>
-                        <strong>Margery Mason</strong>
-                        <strong>Malcolm Storry</strong>
-                        <strong>Willoughby Gray</strong>
-                        <strong>Betsy Brantley</strong>
-                        <strong>Paul Badger</strong>
-                        <strong>Sallie McLaughlin</strong>
+                        @foreach (var actor in Model.Actors)
+                        {
+                            <strong>@actor</strong>
+                        }
                     </span>
                 </p>
             </form>

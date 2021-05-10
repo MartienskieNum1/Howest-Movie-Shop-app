@@ -6,63 +6,71 @@
     int id = rand.Next(0, Model.Count);
 }
 
-<section id="movieoftheday">
-            <a href="/Details?id=@id">
-                <h2>
-                    Movie of the day
-                </h2>
-                <img src="@Model.Movies[id].Url"
-                    alt="@Model.Movies[id].Title" title="@Model.Movies[id].Title">
-                <div>
-                    <p><span>Each day we select a different movie for you to enjoy.
-                            The perfect start for the perfect evening.</span></p>
-                    <p><span>Today's special pick is</span> <strong>@Model.Movies[id].Title</strong></p>
-                </div>
-            </a>
-        </section>
-        <aside>
-            <p><span>@Model.Count</span> deliverable movies and counting!</p>
-        </aside>
-        <section id="collection">
-            <h2>Our collection of movies</h2>
-            <p>Browse our large selection of movies and have your favorite movie delivered to you at a moment
-                of your choosing</p>
-            <p>Stay home, We care about your health.</p>
-            <form method="post" asp-controller="App" asp-action="Filter">
-                <button type="submit" class="order">Search</button>
-                <input type="search" asp-for="SearchValue" id="SearchValue" />
-                <label>Sort items by</label>
-                <select id="SortKey" asp-for="SortKey">
-                    <option value="Title">Title</option>
-                    <option value="Year">Year</option>
-                </select>
-                <select id="SortOrder" asp-for="SortOrder">
-                    <option value="asc">asc</option>
-                    <option value="desc">desc</option>
-                </select>
-            </form>
-            <div class="flexcontainer">
-                @foreach (var movie in Model.Movies)
-                {
-                    <article>
-                        <a href="/Details?id=@movie.Id">
-                            <h3>@movie.Title</h3>
-                            <figure>
-                                <img src="@movie.Url" alt="@movie.Title"
-                                    title="@movie.Title">
-                                <figcaption>
-                                    Year: <span>@movie.Year</span>
-                                </figcaption>
-                            </figure>
-                        </a>
-                        <form method="post" action="/Movie/Order">
-                            <div class="info">
-                                <p>€ <span>@movie.Price</span>/pp</p>
-                                <input type="hidden" name="movieId" value="@movie.Id" />
-                                <input type="submit" value="Order" name="Order" id="orderButton" />
-                            </div>
-                        </form>
-                    </article>
-                }
+@if (Model.Count == 0)
+{
+    <aside>
+        <p>No movies match your request</p>
+    </aside>
+} else
+{
+    <section id="movieoftheday">
+        <a href="/Details?id=@Model.Movies[id].Id">
+            <h2>
+                Movie of the day @id
+            </h2>
+            <img src="@Model.Movies[id].Url"
+                alt="@Model.Movies[id].Title" title="@Model.Movies[id].Title">
+            <div>
+                <p><span>Each day we select a different movie for you to enjoy.
+                        The perfect start for the perfect evening.</span></p>
+                <p><span>Today's special pick is</span> <strong>@Model.Movies[id].Title</strong></p>
             </div>
-        </section>
+        </a>
+    </section>
+    <aside>
+        <p><span>@Model.Count</span> deliverable movies and counting!</p>
+    </aside>
+    <section id="collection">
+        <h2>Our collection of movies</h2>
+        <p>Browse our large selection of movies and have your favorite movie delivered to you at a moment
+            of your choosing</p>
+        <p>Stay home, We care about your health.</p>
+        <form method="post" asp-controller="Movie" asp-action="Filter">
+            <button type="submit" class="order">Search</button>
+            <input type="search" asp-for="SearchValue" id="SearchValue" />
+            <label>Sort items by</label>
+            <select id="SortKey" asp-for="SortKey">
+                <option value="Title">Title</option>
+                <option value="Year">Year</option>
+            </select>
+            <select id="SortOrder" asp-for="SortOrder">
+                <option value="asc">asc</option>
+                <option value="desc">desc</option>
+            </select>
+        </form>
+        <div class="flexcontainer">
+            @foreach (var movie in Model.Movies)
+            {
+                <article>
+                    <a href="/Details?id=@movie.Id">
+                        <h3>@movie.Title</h3>
+                        <figure>
+                            <img src="@movie.Url" alt="@movie.Title"
+                                title="@movie.Title">
+                            <figcaption>
+                                Year: <span>@movie.Year</span>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <form method="post" action="/Movie/Order">
+                        <div class="info">
+                            <p>€ <span>@movie.Price</span>/pp</p>
+                            <input type="hidden" name="movieId" value="@movie.Id" />
+                            <input type="submit" value="Order" name="Order" id="orderButton" />
+                        </div>
+                    </form>
+                </article>
+            }
+        </div>
+    </section>
+}

@@ -10,5 +10,9 @@ namespace app.Models
         public string Url {get; set;}
         public int Year {get; set;}
         public decimal Price {get; set;}
+        public decimal Rating {get; set;}
+        public string Genre {get; set;}
+        public string Plot {get; set;}
+        public List<string> Actors {get; set;}
     }
 }

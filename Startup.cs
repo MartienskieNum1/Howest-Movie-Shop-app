@@ -57,7 +57,7 @@ namespace app
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddDistributedMemoryCache();
-            services.AddSession(ParallelOptions => {
+            services.AddSession(options => {
                 options.Cookie.Name = ".Movie.Session";
                 options.Cookie.IsEssential = true;
             });

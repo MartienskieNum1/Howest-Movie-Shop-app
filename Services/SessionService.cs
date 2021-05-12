@@ -25,5 +25,33 @@ namespace app.Services
                 return null;
             }
         }
+
+        public void AddToCart(ISession session, int id)
+        {
+            List<int> previousCart = GetCart(session);
+            List<int> newCart = new List<int>();
+            
+            if (previousCart == null)
+            {
+                newCart.Add(id);
+                session.SetString("cart", JsonSerializer.Serialize(newCart));
+            } else
+            {
+                previousCart.Add(id);
+                session.SetString("cart", JsonSerializer.Serialize(previousCart));
+            }
+        }
+
+        public List<int> GetCart(ISession session)
+        {
+            string cartJson = session.GetString("cart");
+            if (!string.IsNullOrEmpty(cartJson))
+            {
+                return JsonSerializer.Deserialize<List<int>>(cartJson);   
+            } else
+            {
+                return null;
+            }
+        }
     }
 }

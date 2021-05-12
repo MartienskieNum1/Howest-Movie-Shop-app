@@ -30,8 +30,7 @@ namespace app.Controllers
             } else
             {
                 movies = movieService.All();
-                System.Console.WriteLine("from db");
-                // sessionService.StoreMovies(HttpContext.Session, movies);
+                sessionService.StoreMovies(HttpContext.Session, movies);
             }
 
             return View(new MoviesViewModel
@@ -53,7 +52,17 @@ namespace app.Controllers
         }
 
         [HttpPost]
+        [Route("[action]")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Order(MoviesViewModel model)
+        {
+            sessionService.AddToCart(HttpContext.Session, model.MovieId);
+            return RedirectToAction("Movies", "Movie");
+        }
+
+        [HttpPost]
         [Route("/Movie")]
+        [ValidateAntiForgeryToken]
         public IActionResult Filter(MoviesViewModel model)
         {
             System.Linq.IOrderedEnumerable<lib.Library.Models.Movie> movies;

@@ -1,5 +1,12 @@
+@model app.Models.ShoppingCartViewModel
+
 @{
     Layout = "_LayoutShop";
+    decimal totalPrice = 0;
+    foreach (var movie in Model.Movies)
+    {
+        totalPrice += movie.Price;
+    }
 }
 
 <section id="cart">
@@ -15,20 +22,19 @@
             </tr>
             </thead>
             <tbody>
+                @foreach (var movie in Model.Movies)
+                {
                     <tr>
-                        <td>2001: A Space Odyssey.</td>
-                        <td>€ 19.90</td>
+                        <td>@movie.Title</td>
+                        <td>€ @movie.Price</td>
                     </tr>
-                    <tr>
-                        <td>1917.</td>
-                        <td>€ 7.72</td>
-                    </tr>
+                }
             </tbody>
             <tfoot>
             <tr>
                 <td></td>
                 <td>
-                    Total:€ 27.62
+                    Total:€ @totalPrice
                 </td>
             </tr>
             </tfoot>

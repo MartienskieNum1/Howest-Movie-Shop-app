@@ -11,5 +11,7 @@ namespace app.Models
         public string SearchValue {get; set;}
         public string SortKey {get; set;}
         public string SortOrder {get; set;}
+        
+        public int MovieId {get; set;}
     }
 }

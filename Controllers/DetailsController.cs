@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using lib.Library.Services;
 using app.Models;
+using app.Services;
 
 namespace app.Controllers
 {
@@ -16,6 +18,7 @@ namespace app.Controllers
         GenreService genreService = new GenreService();
         MovieRoleService movieRoleService = new MovieRoleService();
         PersonService personService = new PersonService();
+        SessionService sessionService = new SessionService();
 
         [Route("/Details")]
         public IActionResult MovieDetail(int id)
@@ -37,6 +40,15 @@ namespace app.Controllers
                 Plot = movie.Plot,
                 Actors = personNames
             });
+        }
+
+        [HttpPost]
+        [Route("[action]")]
+        [ValidateAntiForgeryToken]
+        public IActionResult Order(MovieViewModel model)
+        {
+            sessionService.AddToCart(HttpContext.Session, model.Id);
+            return RedirectToAction("Movies", "Movie");
         }
     }
 }

@@ -12,9 +12,9 @@
             @Model.Title
         </h2>
         <div>
-            <form method="post" action="">
+            <form method="post" asp-controller="Details" asp-action="Order">
                 <div class="info">
-                    <input type="hidden" name="movieId" value="@Model.Id" />
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
                     <input type="submit" value="Order" name="Order" id="orderButton" />
                 </div>
                 <br />

@@ -8,6 +8,7 @@ using app.Models;
 
 namespace app.Controllers
 {
+    [Route("[controller]")]
     public class DetailsController : Controller
     {
         MovieService movieService = new MovieService();

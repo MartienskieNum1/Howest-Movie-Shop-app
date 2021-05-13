@@ -13,7 +13,10 @@
 <div id="cartoverview">
     <h2>Your shopping cart</h2>
 
-    @if (Model.Movies.Count == 0)
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <p>Please <a asp-area="Identity" asp-page="/Account/Login">login</a> to continue</p>
+    } else if (Model.Movies.Count == 0)
     {
         <p>Please place an order from our <a href="/Movies">collection</a> to continue</p>
     } else

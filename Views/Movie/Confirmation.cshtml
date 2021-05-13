@@ -1,0 +1,13 @@
+@model app.Models.CheckoutViewModel
+
+@{
+    Layout = "_LayoutShop";
+}
+
+<section id="cart">
+<div id="cartoverview">
+    <h2>Thank you @Model.Name for your order</h2>
+    <p>Your order will be paid with @Model.PaymentMethod .</p>
+    <p>We will ship your movies upon payment confirmation.</p>
+</div>
+</section>

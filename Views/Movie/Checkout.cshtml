@@ -1,3 +1,5 @@
+@model app.Models.CheckoutViewModel
+
 @{
     Layout = "_LayoutShop";
 }
@@ -7,30 +9,30 @@
         <div class="text-danger validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
 </ul></div>
         <br/>
-        <form method="POST" action="/ShoppingCart">
+        <form method="POST" asp-controller="ShoppingCart" asp-action="Confirm">
             <label for="Name">Full name:</label>
-            <input id="Name" name="Name" type="text" value="matthiasblomme@gmail.com"/>
+            <input id="Name" asp-for="Name" type="text" value="@Model.Name"/>
 
             <label for="Street">Street:</label>
-            <textarea id="Street" name="Street">sqdf</textarea>
+            <textarea id="Street" asp-for="Street"></textarea>
 
             <label for="City">City:</label>
-            <textarea id="City" name="City">qsdf</textarea>
+            <textarea id="City" asp-for="City"></textarea>
 
             <label for="PostalCode">Postal code:</label>
-            <textarea id="PostalCode" name="PostalCode">qsdf</textarea>
+            <textarea id="PostalCode" asp-for="PostalCode"></textarea>
 
             <label for="Country">Country:</label>
-            <textarea id="Country" name="Country">qsf</textarea>
+            <textarea id="Country" asp-for="Country"></textarea>
 
             <label>Payment method:</label>
-            <input checked type="radio" name="PaymentMethod" id="payment-card" value="card"/><label
+            <input checked type="radio" asp-for="PaymentMethod" id="payment-card" value="card"/><label
                 for="payment-card">Card</label>
-            <input type="radio" name="PaymentMethod" id="payment-bitcoin" value="bitcoin"/><label for="payment-bitcoin">Bitcoin</label>
-            <input type="radio" name="PaymentMethod" id="payment-goldbars" value="gold_bars"/><label
+            <input type="radio" asp-for="PaymentMethod" id="payment-bitcoin" value="bitcoin"/><label for="payment-bitcoin">Bitcoin</label>
+            <input type="radio" asp-for="PaymentMethod" id="payment-goldbars" value="gold_bars"/><label
                 for="payment-goldbars">Gold
             bars</label>
-            <input type="radio" name="PaymentMethod" id="payment-kind" value="in_kind"/><label for="payment-kind">In
+            <input type="radio" asp-for="PaymentMethod" id="payment-kind" value="in_kind"/><label for="payment-kind">In
             kind</label>
             <input type="submit" value="confirm order" class="order"/>
         </form>

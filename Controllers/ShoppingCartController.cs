@@ -80,6 +80,8 @@ namespace app.Controllers
                 shopOrderDetailService.Add(orderId, movieId, price);
             }
 
+            sessionService.ClearCart(HttpContext.Session);
+
             return View("~/Views/Movie/Confirmation.cshtml", new CheckoutViewModel
             {
                 Name = model.Name,

@@ -56,5 +56,10 @@ namespace app.Services
                 return null;
             }
         }
+
+        public void ClearCart(ISession session)
+        {
+            session.Remove("cart");
+        }
     }
 }

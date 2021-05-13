@@ -37,8 +37,11 @@ namespace app.Services
                 session.SetString("cart", JsonSerializer.Serialize(newCart));
             } else
             {
-                previousCart.Add(id);
-                session.SetString("cart", JsonSerializer.Serialize(previousCart));
+                if (!previousCart.Contains(id))
+                {
+                    previousCart.Add(id);
+                    session.SetString("cart", JsonSerializer.Serialize(previousCart));
+                }
             }
         }
 

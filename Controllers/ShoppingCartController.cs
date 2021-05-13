@@ -35,5 +35,11 @@ namespace app.Controllers
                 .ToList()
             });
         }
+
+        [Route("[action]")]
+        public IActionResult Checkout()
+        {
+            return View("~/Views/Movie/Checkout.cshtml");
+        }
     }
 }

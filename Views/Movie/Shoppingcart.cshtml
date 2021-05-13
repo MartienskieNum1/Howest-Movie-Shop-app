@@ -12,8 +12,14 @@
 <section id="cart">
 <div id="cartoverview">
     <h2>Your shopping cart</h2>
-    <p>You have selected the following movies so far:</p>
-    <div class="items">
+
+    @if (Model.Movies.Count == 0)
+    {
+        <p>Please place an order from our <a href="/Movies">collection</a> to continue</p>
+    } else
+    {
+        <p>You have selected the following movies so far:</p>
+        <div class="items">
         <table>
             <thead>
             <tr>
@@ -39,7 +45,8 @@
             </tr>
             </tfoot>
         </table>
-    </div>
+        </div>
         <a class="order" href="">Proceed to checkout</a>
+    }   
     </div>
 </section>

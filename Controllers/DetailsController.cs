@@ -38,7 +38,8 @@ namespace app.Controllers
                 Rating = movie.Rating,
                 Genre = genre,
                 Plot = movie.Plot,
-                Actors = personNames
+                Actors = personNames,
+                CartAmount = sessionService.GetCartAmount(HttpContext.Session)
             });
         }
 

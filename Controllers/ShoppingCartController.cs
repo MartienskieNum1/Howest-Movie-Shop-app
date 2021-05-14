@@ -36,6 +36,7 @@ namespace app.Controllers
 
             return View("~/Views/Movie/Shoppingcart.cshtml", new ShoppingCartViewModel
             {
+                CartAmount = sessionService.GetCartAmount(HttpContext.Session),
                 Movies = movies.Select(m => {
                     var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
                     return new MovieViewModel

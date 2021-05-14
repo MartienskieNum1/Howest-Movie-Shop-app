@@ -14,5 +14,6 @@ namespace app.Models
         public string Genre {get; set;}
         public string Plot {get; set;}
         public List<string> Actors {get; set;}
+        public int CartAmount {get; set;}
     }
 }

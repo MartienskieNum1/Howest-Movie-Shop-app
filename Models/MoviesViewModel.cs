@@ -13,5 +13,6 @@ namespace app.Models
         public string SortOrder {get; set;}
         
         public int MovieId {get; set;}
+        public int CartAmount {get; set;}
     }
 }

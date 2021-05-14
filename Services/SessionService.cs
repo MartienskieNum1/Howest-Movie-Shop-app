@@ -61,5 +61,16 @@ namespace app.Services
         {
             session.Remove("cart");
         }
+
+        public int GetCartAmount(ISession session)
+        {
+            if (GetCart(session) == null)
+            {
+                return 0;
+            } else
+            {
+                return GetCart(session).Count;
+            }
+        }
     }
 }

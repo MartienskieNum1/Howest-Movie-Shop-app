@@ -26,6 +26,23 @@ namespace app.Services
             }
         }
 
+        public void SetInOrderProcess(ISession session, bool inProcess)
+        {
+            session.SetString("inOrderProcess", inProcess.ToString());
+        }
+
+        public bool GetInOrderProcess(ISession session)
+        {
+            string inProcess = session.GetString("inOrderProcess");
+            if (!string.IsNullOrEmpty(inProcess))
+            {
+                return Convert.ToBoolean(inProcess);
+            } else
+            {
+                return false;
+            }
+        }
+
         public void AddToCart(ISession session, int id)
         {
             List<int> previousCart = GetCart(session);

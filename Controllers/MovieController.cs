@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using lib.Library.Services;
 using app.Models;
 using app.Services;
-using lib.Library.Models;
 
 namespace app.Controllers
 {
@@ -40,11 +39,8 @@ namespace app.Controllers
         [AllowAnonymous]
         public IActionResult Movies()
         {
-            IEnumerable<Movie> movies;
-            if (sessionService.GetMovies(HttpContext.Session) != null)
-            {
-                movies = sessionService.GetMovies(HttpContext.Session);
-            } else
+            var movies = movies = sessionService.GetMovies(HttpContext.Session);
+            if (movies == null)
             {
                 movies = movieService.All();
                 sessionService.StoreMovies(HttpContext.Session, movies);

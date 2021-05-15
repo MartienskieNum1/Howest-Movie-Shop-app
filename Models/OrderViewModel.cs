@@ -7,7 +7,7 @@ namespace app.Models
     {
         public int OrderId {get; set;}
         public string OrderDate {get; set;}
-        public List<string> Titles {get; set;}
+        public Dictionary<string, int> Movies {get; set;}
         public decimal TotalPrice {get; set;}
         public string CustomerName {get; set;}
         public string Address {get; set;}

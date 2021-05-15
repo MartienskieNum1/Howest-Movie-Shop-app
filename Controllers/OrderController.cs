@@ -34,11 +34,11 @@ namespace app.Controllers
                     var customer = shopCustomerService.GetCustomerForCustomerId(Convert.ToInt32(o.CustomerId));
                     List<int> movieIds = shopOrderDetailService.GetMovieIdsForOrderId(Convert.ToInt32(o.Id));
                     var movies = sessionService.GetMoviesForMovieIds(HttpContext.Session, movieIds);
-                    List<string> movieTitles = new List<string>();
+                    Dictionary<string, int> movieDict = new Dictionary<string, int>();
                     decimal totalPrice = 0;
                     foreach (var movie in movies)
                     {
-                        movieTitles.Add(movie.Title);
+                        movieDict.Add(movie.Title, Convert.ToInt32(movie.Id));
                         totalPrice += shopOrderDetailService.GetPriceForMovieIdAndOrderId(Convert.ToInt32(movie.Id), Convert.ToInt32(o.Id));
                     }
 
@@ -48,7 +48,7 @@ namespace app.Controllers
                         OrderDate = ((DateTime) o.OrderDate).ToString("d", CultureInfo.CreateSpecificCulture("fr-FR")),
                         Address = $"{o.Street}, {o.PostalCode} {o.City}, {o.Country}",
                         CustomerName = customer.Name,
-                        Titles = movieTitles,
+                        Movies = movieDict,
                         TotalPrice = totalPrice
                     };
                 })

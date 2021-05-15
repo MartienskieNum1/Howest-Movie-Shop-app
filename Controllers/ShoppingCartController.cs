@@ -97,7 +97,7 @@ namespace app.Controllers
             return View("~/Views/Movie/Confirmation.cshtml", new CheckoutViewModel
             {
                 Name = model.Name,
-                PaymentMethod = model.PaymentMethod
+                PaymentMethod = model.PaymentMethod.Replace("_", " ")
             });
         }
     }

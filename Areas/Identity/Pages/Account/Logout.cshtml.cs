@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using app.Services;
 
 namespace app.Areas.Identity.Pages.Account
 {
@@ -15,6 +17,7 @@ namespace app.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
+        SessionService sessionService = new SessionService();
 
         public LogoutModel(SignInManager<IdentityUser> signInManager, ILogger<LogoutModel> logger)
         {
@@ -30,6 +33,7 @@ namespace app.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            sessionService.ClearSession(HttpContext.Session);
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

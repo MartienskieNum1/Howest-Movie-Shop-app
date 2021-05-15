@@ -1,0 +1,51 @@
+@model app.Models.OrdersViewModel
+
+@{
+    Layout = "_LayoutShop";
+}
+
+<section id="cart">
+<div id="cartoverview">
+    <h2>Orders</h2>
+    <div class="items">
+    @if (Model.Orders.Count == 0)
+    {
+        <p>There are no orders</p>
+    } else
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Titles</th>
+                <th>Total Price</th>
+                <th>Customer</th>
+                <th>Address</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderId</td>
+                        <td>@order.OrderDate</td>
+                        <td>
+                        @foreach (string title in order.Titles)
+                        {
+                            @title<br>
+                        }
+                        </td>
+                        <td>@order.TotalPrice</td>
+                        <td>@order.CustomerName</td>
+                        <td>@order.Address</td>
+                        <td><a href="/Delete?id=@order.OrderId">Delete</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    </div>
+</div>
+</section>

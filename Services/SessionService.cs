@@ -72,5 +72,10 @@ namespace app.Services
                 return GetCart(session).Count;
             }
         }
+
+        public void ClearSession(ISession session)
+        {
+            session.Clear();
+        }
     }
 }

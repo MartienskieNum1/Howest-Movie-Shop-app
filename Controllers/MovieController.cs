@@ -24,6 +24,20 @@ namespace app.Controllers
         [Route("")]
         [Route("[action]")]
         [AllowAnonymous]
+        public IActionResult CheckProcess()
+        {
+            bool inProcess = sessionService.GetInOrderProcess(HttpContext.Session);
+            if (inProcess)
+            {
+                return RedirectToAction("ShoppingCart", "ShoppingCart");
+            } else
+            {
+                return RedirectToAction("Movies");
+            }
+        }
+
+        [Route("[action]")]
+        [AllowAnonymous]
         public IActionResult Movies()
         {
             IEnumerable<Movie> movies;
@@ -35,6 +49,8 @@ namespace app.Controllers
                 movies = movieService.All();
                 sessionService.StoreMovies(HttpContext.Session, movies);
             }
+
+            sessionService.SetInOrderProcess(HttpContext.Session, false);
 
             return View(new MoviesViewModel
             {
@@ -62,7 +78,7 @@ namespace app.Controllers
         public IActionResult Order(MoviesViewModel model)
         {
             sessionService.AddToCart(HttpContext.Session, model.MovieId);
-            return RedirectToAction("Movies", "Movie");
+            return RedirectToAction("Movies");
         }
 
         [HttpPost]

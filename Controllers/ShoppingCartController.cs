@@ -35,6 +35,8 @@ namespace app.Controllers
             List<int> ids = sessionService.GetCart(HttpContext.Session);
             var movies = movieService.GetMoviesForMovieIds(ids);
 
+            sessionService.SetInOrderProcess(HttpContext.Session, true);
+
             return View("~/Views/Movie/Shoppingcart.cshtml", new ShoppingCartViewModel
             {
                 CartAmount = sessionService.GetCartAmount(HttpContext.Session),
@@ -85,6 +87,7 @@ namespace app.Controllers
             }
 
             sessionService.ClearCart(HttpContext.Session);
+            sessionService.SetInOrderProcess(HttpContext.Session, false);
 
             return View("~/Views/Movie/Confirmation.cshtml", new CheckoutViewModel
             {

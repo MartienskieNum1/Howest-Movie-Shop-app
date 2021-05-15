@@ -27,6 +27,31 @@ namespace app.Services
             }
         }
 
+        public void StorePrices(ISession session, IEnumerable<ShopMoviePrice> moviePrices)
+        {
+            session.SetString("moviePrices", JsonSerializer.Serialize(moviePrices));
+        }
+
+        public IEnumerable<ShopMoviePrice> GetPrices(ISession session)
+        {
+            string pricesJson = session.GetString("moviePrices");
+            if (!string.IsNullOrEmpty(pricesJson))
+            {
+                return JsonSerializer.Deserialize<IEnumerable<ShopMoviePrice>>(pricesJson);
+            } else
+            {
+                return null;
+            }
+        }
+
+        public decimal GetPriceForMovieId(ISession session, int movieId)
+        {
+            return GetPrices(session)
+                    .Where(p => p.MovieId == movieId)
+                    .Select(p=> p.UnitPrice)
+                    .First();
+        }
+
         public Movie GetMovieForMovieId(ISession session, int movieId)
         {
             return GetMovies(session)

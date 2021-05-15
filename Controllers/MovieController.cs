@@ -44,6 +44,7 @@ namespace app.Controllers
             {
                 movies = movieService.All();
                 sessionService.StoreMovies(HttpContext.Session, movies);
+                sessionService.StorePrices(HttpContext.Session, shopMoviePriceService.All());
             }
 
             sessionService.SetInOrderProcess(HttpContext.Session, false);
@@ -59,7 +60,7 @@ namespace app.Controllers
                 Count = movies.Count(),
                 CartAmount = sessionService.GetCartAmount(HttpContext.Session),
                 Movies = movies.Select(m => {
-                    var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
+                    var price = sessionService.GetPriceForMovieId(HttpContext.Session, Convert.ToInt32(m.Id));
                     return new MovieViewModel
                     {
                         Id = Convert.ToInt32(m.Id),
@@ -100,7 +101,7 @@ namespace app.Controllers
                 SortOrder = model.SortOrder,
                 Count = movies.Count(),
                 Movies = movies.Select(m => {
-                    var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
+                    var price = sessionService.GetPriceForMovieId(HttpContext.Session, Convert.ToInt32(m.Id));
                     return new MovieViewModel
                     {
                         Id = Convert.ToInt32(m.Id),

@@ -19,7 +19,6 @@ namespace app.Controllers
         ShopCustomerService shopCustomerService = new ShopCustomerService();
         ShopOrderService shopOrderService = new ShopOrderService();
         ShopOrderDetailService shopOrderDetailService = new ShopOrderDetailService();
-        ShopMoviePriceService shopMoviePriceService = new ShopMoviePriceService();
         SessionService sessionService = new SessionService();
 
         public ShoppingCartController(UserManager<IdentityUser> userManager)
@@ -38,7 +37,7 @@ namespace app.Controllers
             {
                 movies = sessionService.GetMoviesForMovieIds(HttpContext.Session, ids)
                             .Select(m => {
-                                var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
+                                var price = sessionService.GetPriceForMovieId(HttpContext.Session, Convert.ToInt32(m.Id));
                                 return new MovieViewModel
                                 {
                                     Title = m.Title,
@@ -87,7 +86,7 @@ namespace app.Controllers
             int orderId = shopOrderService.Add(customerId, model.Street, model.City, model.PostalCode, model.Country);
             foreach (int movieId in sessionService.GetCart(HttpContext.Session))
             {
-                decimal price = shopMoviePriceService.GetPriceForMovieId(movieId);
+                decimal price = sessionService.GetPriceForMovieId(HttpContext.Session, movieId);
                 shopOrderDetailService.Add(orderId, movieId, price);
             }
 

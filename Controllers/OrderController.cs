@@ -53,5 +53,14 @@ namespace app.Controllers
                 .ToList()
             });
         }
+
+        [Route("/Delete")]
+        public IActionResult Delete(int id)
+        {
+            shopOrderService.Delete(id);
+            shopOrderDetailService.DeleteOrderDetailsForOrderId(id);
+
+            return RedirectToAction("Orders");
+        }
     }
 }

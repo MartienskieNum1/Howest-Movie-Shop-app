@@ -100,6 +100,7 @@ namespace app.Controllers
                 SortKey = model.SortKey,
                 SortOrder = model.SortOrder,
                 Count = movies.Count(),
+                CartAmount = sessionService.GetCartAmount(HttpContext.Session),
                 Movies = movies.Select(m => {
                     var price = sessionService.GetPriceForMovieId(HttpContext.Session, Convert.ToInt32(m.Id));
                     return new MovieViewModel

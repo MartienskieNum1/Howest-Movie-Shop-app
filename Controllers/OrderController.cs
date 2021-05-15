@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using app.Models;
 using lib.Library.Services;
 using app.Services;
@@ -21,6 +23,7 @@ namespace app.Controllers
         SessionService sessionService = new SessionService();
 
         [Route("/Order")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Orders()
         {
             var orders = shopOrderService.All();
@@ -55,6 +58,7 @@ namespace app.Controllers
         }
 
         [Route("/Delete")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(int id)
         {
             shopOrderService.Delete(id);

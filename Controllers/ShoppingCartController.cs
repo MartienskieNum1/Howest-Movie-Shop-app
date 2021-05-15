@@ -29,6 +29,7 @@ namespace app.Controllers
         }
 
         [Route("/ShoppingCart")]
+        [AllowAnonymous]
         public IActionResult ShoppingCart()
         {
             List<int> ids = sessionService.GetCart(HttpContext.Session);
@@ -50,6 +51,7 @@ namespace app.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public async Task<IActionResult> Checkout()
         {
             var user = await userManager.GetUserAsync(HttpContext.User);
@@ -61,6 +63,7 @@ namespace app.Controllers
         }
 
         [Route("[action]")]
+        [Authorize]
         public async Task<IActionResult> Confirm(CheckoutViewModel model)
         {
             var user = await userManager.GetUserAsync(HttpContext.User);

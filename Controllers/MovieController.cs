@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using lib.Library.Services;
 using app.Models;
 using app.Services;
@@ -21,6 +23,7 @@ namespace app.Controllers
 
         [Route("")]
         [Route("[action]")]
+        [AllowAnonymous]
         public IActionResult Movies()
         {
             IEnumerable<Movie> movies;
@@ -55,6 +58,7 @@ namespace app.Controllers
         [HttpPost]
         [Route("[action]")]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Order(MoviesViewModel model)
         {
             sessionService.AddToCart(HttpContext.Session, model.MovieId);
@@ -64,6 +68,7 @@ namespace app.Controllers
         [HttpPost]
         [Route("/Movie")]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Filter(MoviesViewModel model)
         {
             System.Linq.IOrderedEnumerable<lib.Library.Models.Movie> movies;

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using lib.Library.Services;
 using app.Models;
 using app.Services;
@@ -21,6 +23,7 @@ namespace app.Controllers
         SessionService sessionService = new SessionService();
 
         [Route("/Details")]
+        [AllowAnonymous]
         public IActionResult MovieDetail(int id)
         {
             var movie = movieService.GetMovieForMovieId(id);
@@ -46,6 +49,7 @@ namespace app.Controllers
         [HttpPost]
         [Route("[action]")]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public IActionResult Order(MovieViewModel model)
         {
             sessionService.AddToCart(HttpContext.Session, model.Id);

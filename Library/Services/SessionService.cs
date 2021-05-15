@@ -58,6 +58,23 @@ namespace app.Services
             }
         }
 
+        public void SetFilter(ISession session, MoviesViewModel model)
+        {
+            session.SetString("filter", JsonSerializer.Serialize(model));
+        }
+
+        public MoviesViewModel GetFilter(ISession session)
+        {
+            string filter = session.GetString("filter");
+            if (!string.IsNullOrEmpty(filter))
+            {
+                return JsonSerializer.Deserialize<MoviesViewModel>(filter);
+            } else
+            {
+                return null;
+            }
+        }
+
         public void AddToCart(ISession session, int id)
         {
             List<int> previousCart = GetCart(session);

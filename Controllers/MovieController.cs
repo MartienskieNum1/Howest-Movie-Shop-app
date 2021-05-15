@@ -48,6 +48,12 @@ namespace app.Controllers
 
             sessionService.SetInOrderProcess(HttpContext.Session, false);
 
+            MoviesViewModel filter = sessionService.GetFilter(HttpContext.Session);
+            if (filter != null)
+            {
+                return Filter(filter);
+            }
+
             return View(new MoviesViewModel
             {
                 Count = movies.Count(),
@@ -82,6 +88,33 @@ namespace app.Controllers
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         public IActionResult Filter(MoviesViewModel model)
+        {
+            sessionService.SetFilter(HttpContext.Session, model);
+
+            var movies = GetFilteredMovies(model);
+
+            return View("Movies", new MoviesViewModel
+            {
+                SearchValue = model.SearchValue,
+                SortKey = model.SortKey,
+                SortOrder = model.SortOrder,
+                Count = movies.Count(),
+                Movies = movies.Select(m => {
+                    var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
+                    return new MovieViewModel
+                    {
+                        Id = Convert.ToInt32(m.Id),
+                        Title = m.Title,
+                        Url = m.CoverUrl,
+                        Year = m.Year,
+                        Price = price
+                    };
+                })
+                .ToList()
+            });
+        }
+
+        private System.Linq.IOrderedEnumerable<lib.Library.Models.Movie> GetFilteredMovies(MoviesViewModel model)
         {
             System.Linq.IOrderedEnumerable<lib.Library.Models.Movie> movies;
             string sortKey = model.SortKey;
@@ -150,24 +183,8 @@ namespace app.Controllers
                     }
                 }
             }
-            
 
-            return View("Movies", new MoviesViewModel
-            {
-                Count = movies.Count(),
-                Movies = movies.Select(m => {
-                    var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
-                    return new MovieViewModel
-                    {
-                        Id = Convert.ToInt32(m.Id),
-                        Title = m.Title,
-                        Url = m.CoverUrl,
-                        Year = m.Year,
-                        Price = price
-                    };
-                })
-                .ToList()
-            });
+            return movies;
         }
     }
 }

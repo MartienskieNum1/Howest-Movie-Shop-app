@@ -39,7 +39,7 @@ namespace app.Controllers
         [AllowAnonymous]
         public IActionResult Movies()
         {
-            var movies = movies = sessionService.GetMovies(HttpContext.Session);
+            var movies = sessionService.GetMovies(HttpContext.Session);
             if (movies == null)
             {
                 movies = movieService.All();
@@ -94,11 +94,11 @@ namespace app.Controllers
                     switch (sortKey)
                     {
                         case "Title":
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .OrderBy(m => m.Title);
                             break;
                         default:
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .OrderBy(m => m.Year);
                             break;
                     }
@@ -107,11 +107,11 @@ namespace app.Controllers
                     switch (sortKey)
                     {
                         case "Title":
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .OrderByDescending(m => m.Title);
                             break;
                         default:
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .OrderByDescending(m => m.Year);
                             break;
                     }
@@ -123,12 +123,12 @@ namespace app.Controllers
                     switch (sortKey)
                     {
                         case "Title":
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .Where(m => m.Title.ToLower().Contains(model.SearchValue.ToLower()))
                                 .OrderBy(m => m.Title);
                             break;
                         default:
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .Where(m => m.Title.ToLower().Contains(model.SearchValue.ToLower()))
                                 .OrderBy(m => m.Year);
                             break;
@@ -138,12 +138,12 @@ namespace app.Controllers
                     switch (sortKey)
                     {
                         case "Title":
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .Where(m => m.Title.ToLower().Contains(model.SearchValue.ToLower()))
                                 .OrderByDescending(m => m.Title);
                             break;
                         default:
-                            movies = movieService.All()
+                            movies = sessionService.GetMovies(HttpContext.Session)
                                 .Where(m => m.Title.ToLower().Contains(model.SearchValue.ToLower()))
                                 .OrderByDescending(m => m.Year);
                             break;

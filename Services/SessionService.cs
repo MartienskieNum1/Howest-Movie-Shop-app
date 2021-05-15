@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
@@ -24,6 +25,20 @@ namespace app.Services
             {
                 return null;
             }
+        }
+
+        public Movie GetMovieForMovieId(ISession session, int movieId)
+        {
+            return GetMovies(session)
+                .Where(m => m.Id == movieId)
+                .First();
+        }
+
+        public IEnumerable<Movie> GetMoviesForMovieIds(ISession session, List<int> ids)
+        {
+            return GetMovies(session)
+                .Where(m => ids.Contains(Convert.ToInt32(m.Id)))
+                .ToList();
         }
 
         public void SetInOrderProcess(ISession session, bool inProcess)

@@ -15,7 +15,6 @@ namespace app.Controllers
     [Route("[controller]")]
     public class DetailsController : Controller
     {
-        MovieService movieService = new MovieService();
         GenreMovieService genreMovieService = new GenreMovieService();
         GenreService genreService = new GenreService();
         MovieRoleService movieRoleService = new MovieRoleService();
@@ -26,7 +25,7 @@ namespace app.Controllers
         [AllowAnonymous]
         public IActionResult MovieDetail(int id)
         {
-            var movie = movieService.GetMovieForMovieId(id);
+            var movie = sessionService.GetMovieForMovieId(HttpContext.Session, id);
             int genreId = genreMovieService.GetGenreIdForMovieId(id);
             string genre = genreService.GetGenreForGenreId(genreId);
             List<int> personIds = movieRoleService.GetPersonIdsForMovieIdAndRole(id, "actor");

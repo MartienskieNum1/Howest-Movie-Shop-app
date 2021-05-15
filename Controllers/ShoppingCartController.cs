@@ -16,7 +16,6 @@ namespace app.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
-        MovieService movieService = new MovieService();
         ShopCustomerService shopCustomerService = new ShopCustomerService();
         ShopOrderService shopOrderService = new ShopOrderService();
         ShopOrderDetailService shopOrderDetailService = new ShopOrderDetailService();
@@ -33,22 +32,28 @@ namespace app.Controllers
         public IActionResult ShoppingCart()
         {
             List<int> ids = sessionService.GetCart(HttpContext.Session);
-            var movies = movieService.GetMoviesForMovieIds(ids);
+
+            List<MovieViewModel> movies = new List<MovieViewModel>();
+            if (ids != null)
+            {
+                movies = sessionService.GetMoviesForMovieIds(HttpContext.Session, ids)
+                            .Select(m => {
+                                var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
+                                return new MovieViewModel
+                                {
+                                    Title = m.Title,
+                                    Price = price
+                                };
+                            })
+                            .ToList();
+            }
 
             sessionService.SetInOrderProcess(HttpContext.Session, true);
 
             return View("~/Views/Movie/Shoppingcart.cshtml", new ShoppingCartViewModel
             {
                 CartAmount = sessionService.GetCartAmount(HttpContext.Session),
-                Movies = movies.Select(m => {
-                    var price = shopMoviePriceService.GetPriceForMovieId(Convert.ToInt32(m.Id));
-                    return new MovieViewModel
-                    {
-                        Title = m.Title,
-                        Price = price
-                    };
-                })
-                .ToList()
+                Movies = movies
             });
         }
 

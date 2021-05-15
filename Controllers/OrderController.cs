@@ -19,7 +19,6 @@ namespace app.Controllers
         ShopOrderService shopOrderService = new ShopOrderService();
         ShopCustomerService shopCustomerService = new ShopCustomerService();
         ShopOrderDetailService shopOrderDetailService = new ShopOrderDetailService();
-        MovieService movieService = new MovieService();
         SessionService sessionService = new SessionService();
 
         [Route("/Order")]
@@ -34,7 +33,7 @@ namespace app.Controllers
                 Orders = orders.Select(o => {
                     var customer = shopCustomerService.GetCustomerForCustomerId(Convert.ToInt32(o.CustomerId));
                     List<int> movieIds = shopOrderDetailService.GetMovieIdsForOrderId(Convert.ToInt32(o.Id));
-                    var movies = movieService.GetMoviesForMovieIds(movieIds);
+                    var movies = sessionService.GetMoviesForMovieIds(HttpContext.Session, movieIds);
                     List<string> movieTitles = new List<string>();
                     decimal totalPrice = 0;
                     foreach (var movie in movies)
